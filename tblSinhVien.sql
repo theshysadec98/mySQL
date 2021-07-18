@@ -27,14 +27,20 @@ create table tblKhoa(
 
 -- c1 ---
 select sv_Maso, sv_Hodem, sv_Ten, sv_Ngaysinh, sv_Lop sv_IDKhoa, l_Ten, k_Ten
-from tblSinhVien full join tblLop, tblKhoa;
+from tblsinhvien.tblSinhVien full join tblsinhvien.tblLop, tblsinhvien.tblKhoa;
 -- c2 ----
 select sv_Hodem + sv_Ten as Ho_Ten
-from tblSinhVien;
+from tblsinhvien.tblSinhVien;
 -- c3 --
-select sv_Maso, sv_Hodem, sv_Ten, year(sv_Ngaysinh)
-Liệt kê danh sách các sinh viên (họ tên viết liền)
-Liệt kê danh sách sinh viên: Mã số, họ đệm, tên, tuổi
-Liệt kê danh sách các lớp
-Liệt kê danh sách các khoa
-Tìm những sinh viên thuộc khoa CNTT
+select sv_Maso, sv_Hodem, sv_Ten, year(DATEDIFF(CURDATE(), sv_Ngaysinh) / 365, 0) as Tuoi
+from tblsinhvien.tblSinhVien;
+
+-- c4 --
+select * from tblsinhvien.tblLop;
+-- c5 -- 
+select * from tblsinhvien.tblKhoa;
+-- c6 --
+select sv_Maso, sv_Hodem, sv_Ten, sv_Ngaysinh, sv_Lop sv_IDKhoa, l_Ten, k_Ten
+from tblsinhvien.tblSinhVien full join tblsinhvien.tblLop, tblsinhvien.tblKhoa
+where l_Khoa = "CNTT";
+
