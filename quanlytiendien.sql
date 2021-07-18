@@ -40,7 +40,7 @@ where year(ngaySinh) = '1980';
 
 -- c2 --
 select tenKH, chiSoCuoi-chiSoDau as diffirences 
-from quanlytiendien.KhachHang, quanlytiendien.ChiSo ;
+from quanlytiendien.KhachHang full join quanlytiendien.ChiSo ;
 
 -- c3 --
 select * , chiSoCuoi-chiSoDau as diffirences from quanlytiendien.KhachHang, quanlytiendien.ChiSo, quanlytiendien.DongGia
