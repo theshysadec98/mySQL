@@ -1,6 +1,3 @@
--- Bảng Customers - khách hàng gồm customer_number (mã khách hàng), fullname (họ tên khách hàng), address (địa chỉ), email, phone (số điện thoại).
--- Bảng Accounts - tài khoản gồm account_number (số tài khoản), account_type (kiểu tài khoản), date (ngày mở tài khoản), balance (số dư).
--- Bảng Transactions - giao dịch gồm tran_number (mã giao dịch), account_number (số tài khoản giao dịch), date (thời gian giao dịch), amounts (số tiền giao dịch), descriptions (mô tả giao dịch). 
 
 create database bank;
 create table Customers(
