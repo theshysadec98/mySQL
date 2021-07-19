@@ -43,11 +43,14 @@ select tenKH, chiSoCuoi-chiSoDau as diffirences
 from quanlytiendien.KhachHang full join quanlytiendien.ChiSo ;
 
 -- c3 --
-select * , chiSoCuoi-chiSoDau as diffirences from quanlytiendien.KhachHang, quanlytiendien.ChiSo, quanlytiendien.DongGia
+select * , chiSoCuoi-chiSoDau as diffirences from quanlytiendien.KhachHang 
+inner join quanlytiendien.ChiSo on 
+inner join quanlytiendien.DongGia on
 where KhachHang.maKH = chiso.maKH ;
 
 -- c4 --
-select tenKH ,chiSoCuoi-chiSoDau as diffirences from quanlytiendien.KhachHang, quanlytiendien.ChiSo
+select tenKH ,chiSoCuoi-chiSoDau as diffirences from quanlytiendien.KhachHang
+inner join quanlytiendien.ChiSo on 
 where chiSoCuoi-chiSoDau > 0;
 
 -- c5 --
