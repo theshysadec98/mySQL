@@ -99,9 +99,7 @@ inner join hoadonct on hoadon.id = hoadonct.id_hd
 inner join sanpham on hoadonct.id_sp = sanpham.id
 where tensp like '%Tủ lạnh%'
 having soluong_hoadon between 10 and 20) as hd_tulanh
-from hoadon
-inner join hoadonct on hoadon.id = hoadonct.id_hd
-inner join sanpham on hoadonct.id_sp = sanpham.id;
+from hoadon;
 
 
 -- c15  In ra danh sách các sản phẩm (MASP,TENSP) không bán được
