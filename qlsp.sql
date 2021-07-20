@@ -85,28 +85,25 @@ where (tensp like '%Máy giặt%' or '%Tủ lạnh%') and (soluong_hoadon betwee
 
 -- c13 Tìm các số hóa đơn mua cùng lúc 2 sản phẩm “Máy giặt” và “Tủ lạnh”, mỗi sản phẩmmua với số lượng từ 10 đến 20
 use qlsp;
-select distinct (select count( hoadon.id)
+select hoadon.id_kh
 from hoadon
 inner join hoadonct on hoadon.id = hoadonct.id_hd
 inner join sanpham on hoadonct.id_sp = sanpham.id
 where tensp like '%Máy giặt%'
-and soluong_hoadon between 10 and 20) as hd_maygiat,
-(select count( hoadon.id)
+and soluong_hoadon between 10 and 20
+INTERSECT 
+select hoadon.id_kh
 from hoadon
 inner join hoadonct on hoadon.id = hoadonct.id_hd
 inner join sanpham on hoadonct.id_sp = sanpham.id
-where tensp like '%Tủ lạnh%' and soluong_hoadon between 10 and 20) as hd_tulanh
-from hoadon;
+where tensp like '%Tủ lạnh%' and soluong_hoadon between 10 and 20;
 
 
 -- c15  In ra danh sách các sản phẩm (MASP,TENSP) không bán được
 use qlsp;
 select sanpham.id, sanpham.tensp
-from sanpham
-inner join hoadonct on sanpham.id = hoadonct.id_sp
-inner join hoadon on hoadonct.id_hd = hoadon.id
-inner join custumer on hoadon.id_kh = custumer.id
-where soluong_hoadon = 0;
+from sanpham 
+where sanpham.id not in (select hoadonct.id_sp from hoadonct );
 
 
 -- c16 In ra danh sách các sản phẩm (MASP,TENSP) không bán được trong năm 2006
@@ -115,6 +112,5 @@ select sanpham.id, sanpham.tensp
 from sanpham
 inner join hoadonct on sanpham.id = hoadonct.id_sp
 inner join hoadon on hoadonct.id_hd = hoadon.id
-inner join custumer on hoadon.id_kh = custumer.id
-where soluong_hoadon = 0 and hoadon.ngay between '2006-01-01' and '2007-01-01';
+where sanpham.id not in (select hoadonct.id_sp from hoadonct, hoadon where hoadon.id = hoadonct.id_hd  and year(hoadon.ngay) = '2006' ) ;
 
