@@ -30,7 +30,6 @@ create table hoadonct(
     foreign key (id_hd) references hoadon(id)
 );
 
-
 -- c6
 use qlsp;
 select soluong_hoadon, tonggia
@@ -77,28 +76,26 @@ where tensp like '%Máy giặt%' or '%Tủ lạnh%';
 
 -- c12 Tìm các số hóa đơn đã mua sản phẩm “Máy giặt” hoặc “Tủ lạnh”, mỗi sản phẩm muavới số lượng từ 10 đến 20
 use qlsp;
-select hoadon.id
+select count(hoadon.id)
 from hoadon
 inner join hoadonct on hoadon.id = hoadonct.id_hd
 inner join sanpham on hoadonct.id_sp = sanpham.id
-where tensp like '%Máy giặt%' or '%Tủ lạnh%'
-having soluong_hoadon between 10 and 20;
+where (tensp like '%Máy giặt%' or '%Tủ lạnh%') and (soluong_hoadon between 10 and 20);
 
 
 -- c13 Tìm các số hóa đơn mua cùng lúc 2 sản phẩm “Máy giặt” và “Tủ lạnh”, mỗi sản phẩmmua với số lượng từ 10 đến 20
 use qlsp;
-select distinct (select hoadon.id
+select distinct (select count( hoadon.id)
 from hoadon
 inner join hoadonct on hoadon.id = hoadonct.id_hd
 inner join sanpham on hoadonct.id_sp = sanpham.id
 where tensp like '%Máy giặt%'
-having soluong_hoadon between 10 and 20) as hd_maygiat,
-(select hoadon.id
+and soluong_hoadon between 10 and 20) as hd_maygiat,
+(select count( hoadon.id)
 from hoadon
 inner join hoadonct on hoadon.id = hoadonct.id_hd
 inner join sanpham on hoadonct.id_sp = sanpham.id
-where tensp like '%Tủ lạnh%'
-having soluong_hoadon between 10 and 20) as hd_tulanh
+where tensp like '%Tủ lạnh%' and soluong_hoadon between 10 and 20) as hd_tulanh
 from hoadon;
 
 
