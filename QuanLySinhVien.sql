@@ -89,4 +89,4 @@ ADD status int NOT NULL DEFAULT(1);
 -- c12 Cap nhap gia tri Status trong bang Student thanh 0
 use quanlysinhvien;
 ALTER TABLE student
-ADD status int NOT NULL DEFAULT(1);
+alter status set DEFAULT '0';
