@@ -91,7 +91,7 @@ inner join hoadonct on hoadon.id = hoadonct.id_hd
 inner join sanpham on hoadonct.id_sp = sanpham.id
 where tensp like '%Máy giặt%'
 and soluong_hoadon between 10 and 20
-INTERSECT 
+union
 select hoadon.id_kh
 from hoadon
 inner join hoadonct on hoadon.id = hoadonct.id_hd
@@ -113,4 +113,14 @@ from sanpham
 inner join hoadonct on sanpham.id = hoadonct.id_sp
 inner join hoadon on hoadonct.id_hd = hoadon.id
 where sanpham.id not in (select hoadonct.id_sp from hoadonct, hoadon where hoadon.id = hoadonct.id_hd  and year(hoadon.ngay) = '2006' ) ;
+
+-- c26 
+use qlsp;
+select custumer.hoten
+from custumer 
+join hoadon on hoadon.id_kh = custumer.id
+where hoadon.tonggia = (select max(hoadon.tonggia) from qlsp.hoadon where year(hoadon.ngay) = "2006")
+
+-- c27 In ra danh sách 3 khách hàng (MAKH, HOTEN) mua nhiều hàng nhất (tính theo số lượng).
+
 
